@@ -1,6 +1,5 @@
 "use strict";
 
-// PART 1: Types & Coercion
 function parseAmount(input) {
   if (input === null || input === undefined) throw new Error("Amount is required.");
   if (typeof input !== "string" && typeof input !== "number") throw new Error("Invalid amount type. Enter a string or number.");
@@ -8,7 +7,6 @@ function parseAmount(input) {
   let value = input;
   if (typeof value === "string") {
     value = value.trim();
-    // Number("") returns 0, so an empty string must be rejected first.
     if (value === "") throw new Error("Amount cannot be empty.");
   }
 
@@ -18,8 +16,7 @@ function parseAmount(input) {
   return amount;
 }
 
-// + concatenates when one operand is a string: "5" + 2 is "52".
-// - converts operands to numbers: "5" - 2 is 3. typeof null is "object" for historical reasons.
+
 const testInputs = ["500", " 250 ", "", "abc", null, undefined, "12.5.3"];
 for (const input of testInputs) {
   try {
@@ -29,16 +26,13 @@ for (const input of testInputs) {
   }
 }
 
-// PART 2: Scoping & Hoisting
-// const protects the unchanged bank name; let allows the transaction counter to increment.
 const BANK_NAME = "JS National Bank";
 let transactionCounter = 0;
 console.log("Bank:", BANK_NAME);
 transactionCounter += 1;
 console.log("Transaction counter:", transactionCounter);
 
-// HOISTING DEMO
-// Execution-context creation prepares declarations; execution then evaluates statements in order.
+
 console.log("var before declaration:", hoistedVar);
 var hoistedVar = "declared with var";
 
@@ -63,7 +57,6 @@ var notify = function () {
   console.log("Function expression executed.");
 };
 
-// var shares one function-scoped i, so callbacks see 3; let creates a fresh binding per iteration.
 for (var i = 0; i < 3; i++) {
   setTimeout(function () { console.log("var loop:", i); }, 0);
 }
